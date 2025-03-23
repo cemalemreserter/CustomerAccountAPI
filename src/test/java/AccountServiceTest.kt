@@ -1,58 +1,58 @@
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.customer.cache.RedisConfig;
-import org.customer.dto.AccountDTO;
-import org.customer.dto.CustomerDTO;
-import org.customer.service.AccountService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.*;
-import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.kafka.core.KafkaTemplate;
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.customer.cache.RedisConfig
+import org.customer.dto.CustomerDTO
+import org.customer.service.AccountService
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
+import org.junit.runner.RunWith
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.Mockito
+import org.mockito.MockitoAnnotations
+import org.mockito.runners.MockitoJUnitRunner
+import org.springframework.data.redis.core.HashOperations
+import org.springframework.kafka.core.KafkaTemplate
 
-import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
-
-@RunWith(MockitoJUnitRunner.class)
-public class AccountServiceTest {
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+@RunWith(MockitoJUnitRunner::class)
+class AccountServiceTest {
     @InjectMocks
-    private RedisConfig redisTemplate ;
+    private var redisTemplate: RedisConfig? = null
 
     @Mock
-    private KafkaTemplate<String, String> kafkaTemplate;
+    private val kafkaTemplate: KafkaTemplate<String?, String?>? = null
 
     @Mock
-    private HashOperations<String, Object, Object> hashOperations;
+    private val hashOperations: HashOperations<String?, Any?, Any?>? = null
 
     @InjectMocks
-    private AccountService accountService;
+    private var accountService: AccountService? = null
 
     @BeforeEach
-    void setUp() {
-        MockitoAnnotations.initMocks(this);
-        this.redisTemplate = Mockito.mock(RedisConfig.class);
-        accountService = new AccountService(redisTemplate, objectMapper);
-        when(redisTemplate.customerRedisTemplate().opsForHash()).thenReturn(hashOperations);
+    fun setUp() {
+        MockitoAnnotations.initMocks(this)
+        this.redisTemplate = Mockito.mock(RedisConfig::class.java)
+        accountService = AccountService(redisTemplate, objectMapper)
+        Mockito.`when`(redisTemplate.customerRedisTemplate().opsForHash<Any?, Any?>()).thenReturn(hashOperations)
     }
 
     @Test
-    void testCreateAccount() {
-        CustomerDTO customer = CustomerDTO.builder()
-                .customerId("1")
-                .name("Emre")
-                .surname("Serter")
-                .accounts(new ArrayList<>())
-                .build();
+    fun testCreateAccount() {
+        val customer = CustomerDTO.builder()
+            .customerId("1")
+            .name("Emre")
+            .surname("Serter")
+            .accounts(ArrayList())
+            .build()
 
-        when(hashOperations.get("CUSTOMERS", "1")).thenReturn(customer);
-        AccountDTO account = accountService.createAccount("1", 100.0);
-        assertNotNull(account);
-        assertEquals("1", account.getCustomerId());
-        assertEquals(100.0, account.getBalance());
+        Mockito.`when`(hashOperations.get("CUSTOMERS", "1")).thenReturn(customer)
+        val account = accountService.createAccount("1", 100.0)
+        Assertions.assertNotNull(account)
+        Assertions.assertEquals("1", account.customerId)
+        Assertions.assertEquals(100.0, account.balance)
+    }
+
+    companion object {
+        private val objectMapper = ObjectMapper()
     }
 }
