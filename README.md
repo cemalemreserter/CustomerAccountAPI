@@ -16,7 +16,7 @@ Java Branch: feature/Assessment   (default)
 Kotlin : feature/AssessmentKotlin 
 
 
-# Capgemini Assessment
+#  Assessment
 ## Initial conditions:
 The assessment consists of an API to be used for opening a new “current account” of already existing
 customers.
