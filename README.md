@@ -1,4 +1,6 @@
-###  React js file located in the src/api folder
+###  FE html files located under the main/resources/templates (thymeleaf)
+###  http://localhost:8080/accounts/open will render accounts.html
+###  http://localhost:8080/customers/details will show the form. Submitting a valid customerId retrieves and displays the details.
 ###  Accounts and Transactions are different services extending the CustomerService abstraction
 ###  Attention to CI/CD. docker-compose file included and proper git flow
 ###  Testability will be also assessed. Unit tests included
@@ -7,9 +9,6 @@
 ###  The programming language by default is Java/Kotlin
 ###  Considered layers, abstractions, testability and enterprise-level architecture carefully.
 ### I prepared two separate branches including Java and Kotlin APIs for my assessment Since it was told me that it is needed to develop with Kotlin as well later on.
-
-Here is the github repo (public one) link below;
-https://github.com/cemalemreserter/CustomerAccountAPI
 
 
 Java Branch: feature/Assessment   (default)
