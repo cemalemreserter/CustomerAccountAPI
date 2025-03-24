@@ -1,4 +1,6 @@
-###  React js file located in the src/api folder
+###  FE html files located under the main/resources/templates (thymeleaf)
+###  http://localhost:8080/accounts/open will render accounts.html
+###  http://localhost:8080/customers/details will show the form. Submitting a valid customerId retrieves and displays the details.
 ###  Accounts and Transactions are different services extending the CustomerService abstraction
 ###  Attention to CI/CD. docker-compose file included and proper git flow
 ###  Testability will be also assessed. Unit tests included
