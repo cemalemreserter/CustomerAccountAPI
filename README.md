@@ -6,7 +6,9 @@
 ###  Redis used for caching
 ###  The programming language by default is Java/Kotlin
 ###  Considered layers, abstractions, testability and enterprise-level architecture carefully.
-
+### I prepared two separate branches including Java and Kotlin APIs for my assessment Since it was told me that it is needed to develop with Kotlin as well later on.
+#### Java Branch: feature/Assessment   (default)
+#### Kotlin : feature/AssessmentKotlin 
 
 # Capgemini Assessment
 ## Initial conditions:
