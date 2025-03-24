@@ -38,7 +38,7 @@ public final class AppConstants {
 
   public static  final int FETCH_MAX_BYTES_CONFIG = 30000;
 
-  public static  final long CACHE_TTL = 6000;
+  public static  final long CACHE_TTL = 60000;
 
   public static final String BOOTSTRAP_ADDRESS = "localhost:9092";
 

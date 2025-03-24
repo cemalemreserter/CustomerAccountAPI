@@ -21,9 +21,6 @@ public abstract class CustomerService {
         this.redisTemplate = redisTemplate;
     }
 
-    @Bean
-    public RedisConfig getRedisConfig() {
-        return redisTemplate;
-    }
+
 
 }

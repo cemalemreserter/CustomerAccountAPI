@@ -23,6 +23,7 @@ public class TransactionService extends CustomerService {
   public TransactionService(RedisConfig redisTemplate) {
     super(redisTemplate);
   }
+
   @KafkaListener(topics = "transactions", groupId = "transaction_group")
   public void consumeTransaction(String transactionJson) {
     TransactionDTO transaction = null ;
@@ -30,7 +31,7 @@ public class TransactionService extends CustomerService {
       ObjectMapper objectMapper = new ObjectMapper();
       transaction = objectMapper.readValue(transactionJson, TransactionDTO.class);
 
-      this.getRedisConfig().transactionRedisTemplate().opsForList().rightPush("TRANSACTIONS:" + transaction.getAccountId(), transaction);
+      this.redisTemplate.transactionRedisTemplate().opsForList().rightPush("TRANSACTIONS:" + transaction.getAccountId(), transaction);
     } catch (Exception e) {
       logger.error("Transaction record could not consumed -> {} with error : {}", transaction, e.getMessage());
     }

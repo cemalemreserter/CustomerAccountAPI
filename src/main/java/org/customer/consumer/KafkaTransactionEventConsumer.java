@@ -37,7 +37,7 @@ public class KafkaTransactionEventConsumer {
     public void handleRollback(String rollbackMessage) {
         System.out.println("Rolling back transaction: " + rollbackMessage);
         transactionStore.remove(rollbackMessage);
-        transactionService.getRedisConfig().transactionRedisTemplate().opsForHash().delete(rollbackMessage);
+        transactionService.redisTemplate.transactionRedisTemplate().opsForHash().delete(rollbackMessage);
         // Implement rollback logic if needed
         logger.info("Transaction Message receieved -> {}", rollbackMessage);
     }
