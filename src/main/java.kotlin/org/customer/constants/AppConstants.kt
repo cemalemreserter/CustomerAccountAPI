@@ -34,7 +34,7 @@ object AppConstants {
 
     const val FETCH_MAX_BYTES_CONFIG: Int = 30000
 
-    const val CACHE_TTL: Long = 6000
+    const val CACHE_TTL: Long = 60000
 
     const val BOOTSTRAP_ADDRESS: String = "localhost:9092"
 

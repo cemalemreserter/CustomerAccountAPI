@@ -25,7 +25,7 @@ class KafkaTransactionEventConsumer @Autowired constructor(
     fun handleRollback(rollbackMessage: String) {
         println("Rolling back transaction: $rollbackMessage")
         transactionStore.remove(rollbackMessage)
-        transactionService.getRedisConfig().transactionRedisTemplate().opsForHash<Any?, Any?>().delete(rollbackMessage)
+        transactionService.redisTemplate.transactionRedisTemplate().opsForHash<Any?, Any?>().delete(rollbackMessage)
         // Implement rollback logic if needed
         logger.info("Transaction Message receieved -> {}", rollbackMessage)
     }

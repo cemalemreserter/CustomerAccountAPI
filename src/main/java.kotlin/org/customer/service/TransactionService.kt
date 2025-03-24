@@ -18,8 +18,8 @@ class TransactionService(redisTemplate: RedisConfig?) : CustomerService(redisTem
             val objectMapper = ObjectMapper()
             transaction = objectMapper.readValue(transactionJson, TransactionDTO::class.java)
 
-            this.redisConfig.transactionRedisTemplate().opsForList()
-                .rightPush("TRANSACTIONS:" + transaction.accountId, transaction)
+            redisTemplate.transactionRedisTemplate().opsForList()
+                .rightPush("TRANSACTIONS:" + transaction.getAccountId(), transaction)
         } catch (e: Exception) {
             logger.error("Transaction record could not consumed -> {} with error : {}", transaction, e.message)
         }
