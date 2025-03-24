@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Open Account</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Open a New Account</h2>
+    <form id="accountForm">
+        <div class="mb-3">
+            <label for="customerId" class="form-label">Customer ID:</label>
+            <input type="text" class="form-control" id="customerId" required>
+        </div>
+        <div class="mb-3">
+            <label for="initialCredit" class="form-label">Initial Credit:</label>
+            <input type="number" class="form-control" id="initialCredit" step="0.01" required>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="submitForm()">Open Account</button>
+    </form>
+
+    <div class="mt-4" id="result" style="display: none;">
+        <h4>Account Created:</h4>
+        <p><strong>Account ID:</strong> <span id="accountId"></span></p>
+        <p><strong>Balance:</strong> <span id="balance"></span></p>
+    </div>
+</div>
+
+<script>
+    function submitForm() {
+        const customerId = document.getElementById("customerId").value;
+        const initialCredit = document.getElementById("initialCredit").value;
+
+        fetch("/accounts/open?customerId=" + customerId + "&initialCredit=" + initialCredit, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" }
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("accountId").innerText = data.id;
+            document.getElementById("balance").innerText = data.balance;
+            document.getElementById("result").style.display = "block";
+        })
+        .catch(error => console.error("Error:", error));
+    }
+</script>
+</body>
+</html>
